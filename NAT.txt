@@ -1,0 +1,26 @@
+R0---
+ip nat inside static source 10.0.0.10 50.0.0.10
+ip nat inside static source 10.0.0.20 50.0.0.20
+ip nat inside static source 10.0.0.30 50.0.0.30
+
+interface gigabitethernet 0/0
+ip nat inside
+
+interface serial 0/1/0
+ip nat outside
+
+R---
+ip nat inside static source 192.168.1.10 200.0.0.10
+
+interface gigabitethernet 0/0
+ip nat inside
+
+interface serial 0/1/0
+ip nat outside
+
+
+R0---
+ip route 200.0.0.0 255.255.255.0 100.0.0.2
+
+R1---
+ip route 50.0.0.0 255.0.0.0 100.0.0.1
