@@ -1,0 +1,24 @@
+vpn
+
+R0-R2---
+default routing
+
+R0---
+interface tunnel 200 
+ip address 172.18.1.1 255.255.0.0 
+tunnel source se0/1/0 
+tunnel destination 20.0.0.2 
+no shut 
+
+R2---
+interface tunnel 400
+ip address 172.18.1.2 255.255.0.0 
+tunnel source se0/1/0 
+tunnel destination 10.0.0.1 
+no shut 
+
+R0---
+ip route 192.168.2.0 255.255.255.0 172.18.1.2
+
+R2---
+ip route 192.168.1.0 255.255.255.0 172.18.1.1
